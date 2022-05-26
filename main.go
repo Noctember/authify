@@ -31,6 +31,7 @@ func main() {
 
 	spotifyClientId := os.Getenv("SPOTIFY_CLIENT_ID")
 	spotifyClientSecret := os.Getenv("SPOTIFY_CLIENT_SECRET")
+	spotifyCallbackUrl := os.Getenv("SPOTIFY_CALLBACK")
 
 	if spotifyClientId == "" || spotifyClientSecret == "" {
 		panic("SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET not defined")
@@ -46,7 +47,7 @@ func main() {
 		ClientSecret: spotifyClientSecret,
 		Endpoint:     spotify.Endpoint,
 		Scopes:       []string{"streaming", "user-read-playback-state", "user-modify-playback-state", "user-read-currently-playing"},
-		RedirectURL:  "https://tnl.ncbr.wtf/callback",
+		RedirectURL:  spotifyCallbackUrl,
 	}
 	app := fiber.New()
 
